@@ -1,5 +1,5 @@
 === Postie ===
-Contributors: robfelty, 
+Contributors: robfelty,
 Donate link: http://blog.robfelty.com/plugins/postie
 Plugin URI: http://blog.robfelty.com/plugins/postie
 Tags: e-mail, email
@@ -17,14 +17,19 @@ videos, and automatically strip off signatures. It also has support for both
 imap and pop3, with the option for ssl with both.  For usage notes, see the
 [other notes](other_notes) page
 
-= What's new? = 
+= What's new? =
+
+* Markdown fixes (https://github.com/viniciusmassuchetto/wordpress-postie)
+
+    * Removing signatures won't trim lines
+    * Extra space in front of code blocks comes from nowhere
 
 * 1.4.3 (2011.12.12)
     * Removed get_user_by function to make compatible with wp 3.3 - now requires
  2.8+
 
 * 1.4.2 (2011.01.29)
-    * Fixed mailto link bug (thanks to Jason McNeil) 
+    * Fixed mailto link bug (thanks to Jason McNeil)
     * Fixed bug with attachments with non-ascii characters in filename (thanks to
       mtakada)
     * checking for socket errors when checking mail (thanks elysian)
@@ -62,7 +67,7 @@ imap and pop3, with the option for ssl with both.  For usage notes, see the
 * Goto to the "Settings" tab and click on the sub-tab "Postie" to configure it.
 * Make sure you enter the mailserver information correctly, including the type
   of connection and the port number. Common port configurations:
-  * pop3: 110 
+  * pop3: 110
   * pop3-ssl: 995
   * imap: 143
   * imap-ssl: 993
@@ -85,11 +90,11 @@ Examples:
 
 */5 * * * * /usr/bin/lynx --source http://blog.robfelty.com/wp-content/plugins/postie/get\_mail.php >/dev/null 2>&1
 
-This fetches the mail every five minutes with lynx 
+This fetches the mail every five minutes with lynx
 
 */10 * * * * /usr/bin/wget -O /dev/null http://blog.robfelty.com/wp-content/plugins/postie/get\_mail.php >/dev/null 2>&1
 
-This fetches the mail every ten minutes with wget 
+This fetches the mail every ten minutes with wget
 
 == Usage ==
 * If you put in :start - the message processing won't start until it sees that string
@@ -103,7 +108,7 @@ This fetches the mail every ten minutes with wget
    *   comments:0 - means closed
    *   comments:1 - means open
    *   comments:2 - means registered only
-* Replying to an e-mail gets posted as a comment. 
+* Replying to an e-mail gets posted as a comment.
   * For example, you e-mailed a post with the subject line "foo".
     If you then send an e-mail with the subject line "Re: foo", it will
     get posted as a comment to the "foo" post. This works by the subject
@@ -153,7 +158,7 @@ This fetches the mail every ten minutes with wget
 
     * #img1 caption='foo'#
     * #img2 caption='bar'#
-  
+
   Or, if you use IPTC captions, this caption will be used  (adding a caption
   in many photo editing programs (for example Picasa), will add an IPTC caption)
 
@@ -165,10 +170,10 @@ different one if you wish.
 template:
 
   &lt;div class='imageframe alignleft'&gt;&lt;a href='{IMAGE}'&gt;&lt;img src="{THUMBNAIL}"
-  alt="{CAPTION}" title="{CAPTION}" 
+  alt="{CAPTION}" title="{CAPTION}"
   class="attachment" /&gt;&lt;/a&gt;&lt;div
 class='imagecaption'&gt;{CAPTION}&lt;/div&gt;&lt;/div&gt;
-     
+
     * {THUMBNAIL} gets replaced with the url to the thumbnail image
     * {MEDIUM} gets replaced with the url to the medium-sized image
     * {LARGE} gets replaced with the url to the large-sized image
@@ -198,7 +203,7 @@ class='imagecaption'&gt;{CAPTION}&lt;/div&gt;&lt;/div&gt;
 
 Make sure the port you are using is open. For example, bluehost seems to block
 ports 993 and 995 (for pop3-ssl and imap-ssl) by default. I have heard that
-you can request that they open them for you ( you might have to pay extra). 
+you can request that they open them for you ( you might have to pay extra).
 
 You can check for open ports with the following command on your server:
 netstat -ln|grep -E ':::(993|995|143)'
@@ -216,7 +221,7 @@ Make sure you set the preferred text type to html
 
 = Do I need to any code to my theme for postie to work? =
 
-No. 
+No.
 
 = I read somewhere to add an iframe to my footer. Should I do this? =
 
@@ -241,14 +246,14 @@ gmail preferences.
     * port - 995
     * userid - your username (e.g. if your e-mail address is foo@gmail.com,
       this would be just foo)
-    * password - your password 
+    * password - your password
 * IMAP settings:
     * protocol - imap-ssl
     * server - imap.gmail.com
     * port - 993
     * userid - your username (e.g. if your e-mail address is foo@gmail.com,
       this would be just foo)
-    * password - your password 
+    * password - your password
 
 = My posts show up as being posted by 'admin' instead of me. Why? =
 
@@ -257,7 +262,7 @@ bar@gmail.com, it will show up as being posted by admin. If you have a
 wordpress user named "John Doe", which is linked to johndoe@gmail.com, make
 sure that you send e-mails from johndoe@gmail.com. It doesn't matter which
 e-mail address postie is checking. That is, if you send mail from
-johndoe@gmail.com to foo@gmail.com, it gets posted as "John Doe". 
+johndoe@gmail.com to foo@gmail.com, it gets posted as "John Doe".
 
 If you send an e-mail to your postie address from an e-mail address that is no
 t linked to a wordpress user, it will get posted as admin.
@@ -336,7 +341,7 @@ See the filterPostie.php.sample file for examples.
 The IMAP extension is not required, but it is strongly recommended, especially
 is you are using non-English text. There is more information on php.net about
 installing the IMAP extension. If you have control over your server, it is
-often not hard to install. 
+often not hard to install.
 
 On Ubuntu, try
 sudo apt-get install php5-imap
@@ -354,7 +359,7 @@ option to convert url into links turned on)
 
 == CHANGELOG ==
 
-= 1.4.4 = 
+= 1.4.4 =
 * TODO - fix corruption of rtf attachments
 * TODO - add port checking in tests
 * TODO - non-image uploads get ignored in content when using autogallery - see
@@ -365,7 +370,7 @@ option to convert url into links turned on)
  2.8+
 
 = 1.4.2 (2011.01.29) =
-* Fixed mailto link bug (thanks to Jason McNeil) 
+* Fixed mailto link bug (thanks to Jason McNeil)
 * Fixed bug with attachments with non-ascii characters in filename (thanks to
   mtakada)
 * checking for socket errors when checking mail (thanks elysian)
@@ -393,7 +398,7 @@ option to convert url into links turned on)
   with large attachments)
 * Images are sorted in order of filename before inserting into post
 
-= 1.4 (2010.04.25) =  
+= 1.4 (2010.04.25) =
 * Now using wordpress settings api (thanks for much help from Andrew S)
 * Cronless postie is now integrated with postie instead of a separate plugin
 * filterPostie.php moved to filterPostie.php.sample
@@ -426,7 +431,7 @@ option to convert url into links turned on)
   cronless postie plugin
 
 = 1.3.2 (2009.08.27) =
-* tags are now always an array, even if no default tags are set 
+* tags are now always an array, even if no default tags are set
 * Subject is showing up again if you do not have the IMAP extension
   installed
 * More information on the IMAP extension and more user-friendly
@@ -549,7 +554,7 @@ option to convert url into links turned on)
       * Improved internationalization (thanks to Håvard Broberg
         (nanablag@nanablag.com))
   * Bug Fixes
-      * Removed debugging info in get_mail.php (security issue) thanks to 
+      * Removed debugging info in get_mail.php (security issue) thanks to
         [Jens]( http://svalgaard.net/jens/)
       * No longer directly including pluggable.php (should
         prevent conflicts with other plugins such as registerplus
@@ -586,7 +591,7 @@ option to convert url into links turned on)
 
 =  1.1.1 =
 
-Below is all the of the version information. As far as I can tell there once was a guy named John Blade. He took some of the orignal wp-mail.php code and started hacking away on it. He actually got pretty far. About the time I discovered WordPress and his little hack - called WP-Mail at the time - he went on a vacation or something. There were some problems with the script, and it was missing some features I wanted. I hacked away at it and got it into a place where it did what I wanted. I started posting about it since I figured other people might want the features. 
+Below is all the of the version information. As far as I can tell there once was a guy named John Blade. He took some of the orignal wp-mail.php code and started hacking away on it. He actually got pretty far. About the time I discovered WordPress and his little hack - called WP-Mail at the time - he went on a vacation or something. There were some problems with the script, and it was missing some features I wanted. I hacked away at it and got it into a place where it did what I wanted. I started posting about it since I figured other people might want the features.
 
 John didn't release any more versions at least up til July 2005. So I started accepting submissions and feature requests from people to help make the code better. In June/July 2005 I discovered a little plugin by Chris J Davis (http://www.chrisjdavis.org/cjd-notepad/) called notepad. I added a small feature to it (basically a bookmarklet).  In the process I started looking at his code and realized how much you could do with the plugin system available in Word Press.
 
@@ -628,8 +633,8 @@ So I decided to make an offical fork. I put up an article on my blog asking for 
 
 =  0.9.9.2 =
 * BUGFIX: Looks for the NOOP error and disgards it
-* FEATURE: Postie now detects the version of WordPress being used 
-* FEATURE: Smarter Parsing of VodaPhone 
+* FEATURE: Postie now detects the version of WordPress being used
+* FEATURE: Smarter Parsing of VodaPhone
 * FEATURE: Easy place to add new code to handle other brain-dead mail clients
 * BUGFIX: Handles insertion of single quotes properly
 * BUGFIX: Thumbnails should now link properly
@@ -646,7 +651,7 @@ So I decided to make an offical fork. I put up an article on my blog asking for 
 
 =  0.9.8.6 =
 * BUGFIX: Fixed problems with config page &lt;%php became &lt;?php
-* 
+*
 =  0.9.8.5 =
 * BUGFIX: onClick changed to onclick
 * BUGFIX: strolower added to test for iso - thanks daniele
@@ -654,7 +659,7 @@ So I decided to make an offical fork. I put up an article on my blog asking for 
 * FEATURE: Added the option to put the images before the article
 * BUGFIX: Added in selection for charsets - thanks Psykotik - this may cause problems for other encodings
 * FEATURE: Added option to turn of quoted printable decoding
-* FEATURE: :start tag - now postie looks for this tag before looking for you message - handy if your service provider prepends a message 
+* FEATURE: :start tag - now postie looks for this tag before looking for you message - handy if your service provider prepends a message
 * FEATURE: Template for translation now included
 =  0.9.8.4 =
 * BUGFIX: Fixed problem with config_form.php - select had "NULL" instead of ""
@@ -664,13 +669,13 @@ So I decided to make an offical fork. I put up an article on my blog asking for 
 * BUGFIX: Email addresses in the format <some@domain.com> (Full Name) supported
 * BUGFIX: Some images that were not being resized - are now
 * BUGFIX: HTML problems - if you posted plain text with HTML on it ignored all images
-* BUGFIX: The test system blew up on the thumbnails 
+* BUGFIX: The test system blew up on the thumbnails
 * BUGFIX: Selected HTML for preferred text is now shown in the config form properly
 * BUGFIX: Postie now complains if it is not in its own directory
 * BUGFIX: Postie doesn't include PEAR if it is already available
 * BUGFIX: In Test mode rejected emails are simply dropped
 * BUGFIX: Markdown messes up Postie - it will warn you if you turn it on.
-* 
+*
 =  0.9.8.3 =
 * BUGFIX: Fixed issue with the line feed replacement
 * BUGFIX: Added Banned File Config back in
@@ -683,19 +688,19 @@ So I decided to make an offical fork. I put up an article on my blog asking for 
 * BUGFIX: The test system was only using ImageMagick
 
 =  0.9.8.1 =
-* BUGFIX: The test images are now included in the zip 
+* BUGFIX: The test images are now included in the zip
 
 =  0.9.8 =
 * BUGFIX: New Lines detected and handled properly in cases where the mail client doesn't put a space before the new line (Miss Distance)
 * BUGFIX: 3gp mime type added (Paco Cotera)
 * BUGFIX: Authorized Email Addresses are not case-insensitive
-* FEATURE: The larger image now does a proper pop up 
+* FEATURE: The larger image now does a proper pop up
 * BUGFIX: Fixed Timeing Issue - turns out it wasn't reading the db at all
 * FEATURE: New Test Screen - to help track down problems
 
 =  0.9.7 =
 * BUGFIX: removed all short tags
-* BUGFIX: There were spacing issues in the way I wrote the QT embed statements 
+* BUGFIX: There were spacing issues in the way I wrote the QT embed statements
 * FEATURE: Added calls to WP-Cron - should work with that properly now if you activate Cronless Postie
 * FEATURE: ImageMagick version works without any calls to GD
 * BUGFIX: Postie now correctly handles cases wjere tjere are multiple blogs in one db
@@ -726,7 +731,7 @@ So I decided to make an offical fork. I put up an article on my blog asking for 
 * BUGFIX: Confirmed POP3-SSL on debian-3.0
 * BUGFIX: Updated the plugin version
 * BUGFIX: Stopped displaying the email account
-* 
+*
 =  0.9.5 =
 * BUGFIX: Postie handles cases where you do not have GD
 * FEATURE: You can now set the access level for posting - so other people can use the gate way
@@ -755,7 +760,7 @@ So I decided to make an offical fork. I put up an article on my blog asking for 
 =  0.9.3 =
 * Bug fixes for IIS
 =  0.9.2 =
-* Moved to more of a DIRECTORY_SEPARATOR structure 
+* Moved to more of a DIRECTORY_SEPARATOR structure
 =  0.9.1 =
 * Added a define to fix a problem with over including
 =  0.9 =
@@ -767,7 +772,7 @@ So I decided to make an offical fork. I put up an article on my blog asking for 
 =  0.312.13 =
 * Code clean up - The main loop is finally readable by even non programmers
 * FEATURE - You can now post to multiple categories at one time by using the [#],[Category Name], [Cat] in the subject
-* FEATURE - You can now select a category by just including the begining characters [G] will select General 
+* FEATURE - You can now select a category by just including the begining characters [G] will select General
 * if you don't have any other categories that start with g
 * FEATURE - Jay Talbot - added a new feature so you can have multiple email addresses be allowed in
 * Make multi category posting more obvious
@@ -777,7 +782,7 @@ So I decided to make an offical fork. I put up an article on my blog asking for 
 =  0.312.12 =
 * Code clean up - slowing shrinking the main to make it easiery to fix things
 * FEATURE: Be able to turn on/off allowing comments in an email
-* BUG FIX: AppleDouble now mostly supported 
+* BUG FIX: AppleDouble now mostly supported
 * BUG FIX: MIME handling improved.
 * BUG FIX: Fix issue with timing delay
 =  0.312.11 =
@@ -791,14 +796,14 @@ So I decided to make an offical fork. I put up an article on my blog asking for 
 =  0.312.9 =
 * FEATURE:Should handle jpg as well as jpeg as the file type
 * BUG FIX: Now correctly handles the subject in the message
-* BUG FIX: Should handle Text preferences correctly 
+* BUG FIX: Should handle Text preferences correctly
 =  0.312.8 =
-* Some general code tidying. 
+* Some general code tidying.
 * FEATURE: Can now have email from invalid email addresses automatically forwared
-* to the admin's email account. This forward includes all attachments. 
+* to the admin's email account. This forward includes all attachments.
 * Props to David Luden for getting this started.
-* Minor change: The system will continue if it runs into a message that doesn't have 
-* any content - it will also continue to process if it gets an email from 
+* Minor change: The system will continue if it runs into a message that doesn't have
+* any content - it will also continue to process if it gets an email from
 * someone not in the system. In the past this could result in deleted mail
 * if your cron job didn't run often enough.
 =  0.312.7 =
@@ -844,16 +849,16 @@ So I decided to make an offical fork. I put up an article on my blog asking for 
 
 * Todo
 * Have option to have the email that is rejected forwarded on to another address.
-* Fix bug that id still diplays the delay tag in the body 
+* Fix bug that id still diplays the delay tag in the body
 =  0.312 - 2005-03 =
-*  CHANGE FOR DEFAULT E-mail Categories, instead of [General] Subject you can now use General: Subject in the subject line.  Less typing, and there must be a space after the colon. 
-*  Fixed bugs with no default posting for categories and user 
+*  CHANGE FOR DEFAULT E-mail Categories, instead of [General] Subject you can now use General: Subject in the subject line.  Less typing, and there must be a space after the colon.
+*  Fixed bugs with no default posting for categories and user
 =  0.311 - 2005-01 =
 *  eep, major bug for pop3 server. Next time I test my code more before I released, fixed so that pop3 now works.`
 =  0.31 - 2004-12 & 2005-01 =
 * (Has it been this long, best get back into the swing of things... did most of this coding on my holiday as I didn't have a machine to play WoW on :)
 *  moved the deletion of pop3 emails into a check so that e-mails aren't deleted without proper checking.
-*  added HTML 'decoding' (basic support for Thunderbird & Outlook) 
+*  added HTML 'decoding' (basic support for Thunderbird & Outlook)
 *  updated the Category search so that it matches words as well as numbers (i.e. [General] Subjectname will work instead of just [1] Subjectname)
 *  Changed time function from time to strtotime (as per Senior Pez's suggestion), but found out that strtotime isn't in default php distro so removed...
 
@@ -861,7 +866,7 @@ So I decided to make an offical fork. I put up an article on my blog asking for 
 *  Added UBB decoding support
 *  Added default title (when there is no subject assigned)
 *  Started doing a little code cleanup, been reading Advanced PHP Book :)
-* 
+*
 =  0.2 - 2004-08 =
 *  Stopped using pear body decoding in favour of own decoding (may be slower but more modifiable) because of enriched text decoding
 *  Added base64_decode checking (may help mobile phone users)
@@ -872,6 +877,6 @@ So I decided to make an offical fork. I put up an article on my blog asking for 
 *  Updated readme file for easier install
 *  Easy modify of globals (such as PHOTOSDIR and FILESDIR)
 *  Cleaned up some pear stuff in install
-* 
+*
 =  0.1 - 2004-06 =
 * First release
