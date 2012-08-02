@@ -2444,7 +2444,9 @@ function TestPostieDirectory() {
   *This function looks for markdown which causes problems with postie
   */
 function TestForMarkdown() {
-    if (in_array("markdown.php",get_option("active_plugins"))) {
+    $plugins = get_option("active_plugins");
+    if (in_array("markdown.php", $plugins)
+        || in_array("wp-markdown/wp-markdown.php", $plugins)) {
         return(true);
     }
     return(false);
