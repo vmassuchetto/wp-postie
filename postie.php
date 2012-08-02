@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: Postie
+Plugin Name: Postie with some Markdown fixes
 Plugin URI: http://blog.robfelty.com/plugins/postie
 Description: Signifigantly upgrades the posting by mail features of Word Press (See <a href='options-general.php?page=postie/postie.php'>Settings and options</a>) to configure your e-mail settings. See the <a href='http://wordpress.org/extend/plugins/postie/other_notes'>Readme</a> for usage. Visit the <a href='http://forum.robfelty.com/forum/postie'>postie forum</a> for support.
-Version: 1.4.3
+Version: 1000.4.3
 Author: Robert Felty
 Author URI: http://blog.robfelty.com/
 */
@@ -12,7 +12,7 @@ Author URI: http://blog.robfelty.com/
 $Id: postie.php 474355 2011-12-13 04:28:29Z robfelty $
 * -= Requests Pending =-
 * German Umlats don't work
-* Problems under PHP5 
+* Problems under PHP5
 * Problem with some mail server
 * Multiple emails should tie to a single account
 * Each user should be able to have a default category
@@ -34,6 +34,7 @@ $Id: postie.php 474355 2011-12-13 04:28:29Z robfelty $
 *    www.cdavies.org/permalink/watchingbrowserembeddedgpvideosinlinux.php
 * Support private posts
 * Make it possible to post without a script at all
+* Markdown improvements
 */
 
 //Older Version History is in the HISTORY file
@@ -81,37 +82,37 @@ if (is_admin()) {
       load_plugin_textdomain( 'postie', $plugin_dir."/languages/",
       basename(dirname(__FILE__)). '/languages/');
     }
-    add_action('init', 'postie_load_domain'); 
+    add_action('init', 'postie_load_domain');
   }
-  postie_warnings(); 
+  postie_warnings();
 }
 
 function activate_postie() {
 	static $init = false;
 	$options = get_option( 'postie-settings' );
-	
+
 	if ( $init ) return;
 
 	if(!$options) {
 		$options = array();
-	}	
+	}
 	$default_options = get_postie_config_defaults();
 	$old_config = array();
 	$updated = false;
 	$migration = false;
-	
+
 	/*
 	global $wpdb;
 	$GLOBALS["table_prefix"]. "postie_config";
 	$result = $wpdb->get_results("SELECT label,value FROM $postietable ;");
 	*/
-	$result = GetConfig(); 
-	if (is_array($result)) {		
+	$result = GetConfig();
+	if (is_array($result)) {
 		foreach ( $result as $key => $val ) {
 			$old_config[strtolower( $key )] = $val;
 		}
 	}
-	
+
 	// overlay the options on top of each other:
 	// the current value of $options takes priority over the $old_config, which takes priority over the $default_options
 	$options = array_merge( $default_options, $old_config, $options );
@@ -124,16 +125,16 @@ function activate_postie() {
 register_activation_hook(__FILE__, 'activate_postie');
 
 /**
-  * set up actions to show relevant warnings, 
+  * set up actions to show relevant warnings,
   * if mail server is not set, or if IMAP extension is not available
   */
-function postie_warnings() {	
-	
+function postie_warnings() {
+
   $config = get_option( 'postie-settings' );
-	
-  if ( (empty( $config['mail_server'] ) || 
-        empty( $config['mail_server_port'] ) || 
-        empty( $config['mail_userid'] ) || 
+
+  if ( (empty( $config['mail_server'] ) ||
+        empty( $config['mail_server_port'] ) ||
+        empty( $config['mail_userid'] ) ||
         empty( $config['mail_password'] )
        ) && !isset($_POST['submit'] ) ) {
     function postie_enter_info() {
@@ -144,7 +145,7 @@ function postie_warnings() {
     }
     add_action('admin_notices', 'postie_enter_info');
   }
-	
+
   if (!function_exists('imap_mime_header_decode') && $_GET['activate']==true) {
     function postie_imap_warning() {
       echo "<div id='postie-imap-warning' class='error'><p><strong>";
@@ -156,7 +157,7 @@ function postie_warnings() {
     }
     add_action('admin_notices', 'postie_imap_warning');
   }
-	
+
 }
 
 function disable_kses_content() {
