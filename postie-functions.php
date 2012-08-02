@@ -960,23 +960,22 @@ function StartFilter(&$content,$start) {
 * @param array - a list of patterns to determine if it is a sig block
 */
 function remove_signature( $content, $filterList ) {
-  if (empty($filterList))
-    return $content;
-	$arrcontent = explode("\n", $content);
-	$strcontent = '';
-	$pattern='/^('  . implode( '|', $filterList ) . ')/';
-	for ($i = 0; $i<=count($arrcontent); $i++) {
-		$line = trim($arrcontent[$i]);
-		$nextline = $arrcontent[$i+1];
-		if (preg_match($pattern,trim($line))) {
-		//if (!strpos(trim($line), $pattern)==0) {
-			//print("<p>Found in $line");
-			break;
-		}
-		$strcontent .= $line ."\n";
-	}
-  return $strcontent;
+    if (empty($filterList))
+        return $content;
+    $arrcontent = explode("\n", $content);
+    $strcontent = '';
+    $pattern='/^('  . implode( '|', $filterList ) . ')/';
+    for ($i = 0; $i <= count($arrcontent); $i++) {
+        $line = $arrcontent[$i];
+        if (preg_match($pattern,trim($line))) {
+            break;
+        }
+        $strcontent .= $line . "\n";
+    }
+    $strcontent = preg_replace('/^ {5}(.*)$/im', '    \1', $strcontent);
+    return $strcontent;
 }
+
 /**
 * Looks at the content for the given tag and removes all text
 * after that point
